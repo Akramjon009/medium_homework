@@ -16,7 +16,7 @@ namespace Medium.Application.UseCases.MediumUser.Handler.Query
         }
         public async Task<List<User>> Handle(GetAllUsersCommandQuery request, CancellationToken cancellationToken)
         {
-            var users = await _applicationDbContext.Users.ToListAsync();
+            var users = await _applicationDbContext.Users.Where(x => x.IsDeleted != true).ToListAsync();
             return users;
         }
     }

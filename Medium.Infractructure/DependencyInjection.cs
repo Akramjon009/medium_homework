@@ -12,7 +12,7 @@ namespace Medium.Infractructure
         {
             service.AddDbContext<IApplicationDbContext, ApplicationDbContext>(options =>
             {
-                options.UseNpgsql(configuration.GetConnectionString("DefaultConnectionString"));
+                options.UseNpgsql(configuration.GetConnectionString("DefaultConnectionString"), b => b.MigrationsAssembly("Medium.Infractructure")) ;
             });
 
             return service;

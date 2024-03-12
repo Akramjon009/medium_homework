@@ -1,14 +1,26 @@
-﻿using AutoMapper;
-using Medium.Application.UseCases.MediumUser.Commands;
-using Medium.Domain.Entities;
+﻿using System.Reflection;
 
 namespace Medium.Application.Absatractions.Mapper
 {
-    public class AutoMapperProfile : Profile
+    public static class Mapper
     {
-        public AutoMapperProfile()
+        public static TEntity Map<TEntity>(this object entity)
         {
-            CreateMap<User, CreateUserCommand>().ReverseMap();
+            var newEntity = Activator.CreateInstance<TEntity>();
+            var typeNewEntity = newEntity.GetType();
+            var typeObject = entity.GetType();
+
+            PropertyInfo[] properties = typeNewEntity.GetProperties();
+
+            foreach (var property in properties)
+            {
+                var objectProperty = typeObject.GetProperty(property.Name);
+
+                if (objectProperty != null)
+                    property.SetValue(newEntity, objectProperty.GetValue(entity));
+            }
+
+            return (TEntity)newEntity;
         }
     }
 }
