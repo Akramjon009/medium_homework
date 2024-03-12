@@ -1,11 +1,16 @@
-﻿namespace Medium.Domain.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Medium.Domain.Entities
 {
     public class User
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public string? Name { get; set; }
         public string? UserName { get; set; }
+
+        [EmailAddress]
         public string? Email { get; set; }
+
         public string? Bio { get; set; }
         public string? PhotoPath { get; set; }
         public int FollowersCount { get; set; }

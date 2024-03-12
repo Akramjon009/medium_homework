@@ -4,7 +4,7 @@ using Medium.Application.UseCases.MediumUser.Queries;
 using Medium.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Medium.Application.UseCases.MediumUser.Handler
+namespace Medium.Application.UseCases.MediumUser.Handler.Query
 {
     public class GetAllUserCommandQueryHandler : IRequestHandler<GetAllUsersCommandQuery, List<User>>
     {
