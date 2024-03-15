@@ -15,7 +15,9 @@ namespace Medium.Application.UseCases.MediumUser.Handler.Command
             var user = await _applicationDbContext.Users.FirstOrDefaultAsync(x => x.Id == request.Id && x.IsDeleted != true);
             if (user != null)
             {
-                _mapper.Map<User>(request);
+                var result = _mapper.Map<User>(request);
+                _applicationDbContext.Users.Update(result);
+
                 await _applicationDbContext.SaveChangesAsync();
 
                 return user;
